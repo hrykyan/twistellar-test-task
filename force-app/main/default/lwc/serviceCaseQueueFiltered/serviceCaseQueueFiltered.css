@@ -1,0 +1,41 @@
+.c-container {
+    margin: 10px 10px 20px;
+}
+
+.page-section {
+    border: solid 1px;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.page-header
+{
+    height: 50px;
+    border-radius: 10px;
+    padding-left: 1rem;
+}
+
+.page-list-number{
+    border: dashed 2px #ccc ;
+    height: 4.5rem;
+}
+
+.page-status{
+    height: 4.5rem;
+}
+
+.exampleHolder{
+    position: relative;
+    display: inline-block;
+    margin-left: 15px;
+    width: 55px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+
+
+
+
+

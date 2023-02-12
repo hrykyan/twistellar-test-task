@@ -1,0 +1,139 @@
+<apex:page id="AccountCasesPdf" contentType="text/html" controller="AccountCasesPdfCtrl" applyBodyTag="false"
+           standardStylesheets="false" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+    <html>
+    <head>
+
+        <style type="text/css" media="print">
+            @page {
+
+
+                margin-top: 10px;
+                margin-left: 8px;
+                margin-right: 8px;
+                margin-bottom: 220px;
+                @top-center {
+                    content: element(header);
+                }
+                @bottom-right {
+                    content: element(footer);
+
+                }
+            }
+
+            body {
+                font: 1em "Fira Sans", sans-serif;
+                margin-top: 10px;
+                margin-left: 10px;
+
+
+            }
+            .tableClass {text-align:center}
+
+            .footer {
+                display: block;
+                position: running(footer);
+                text-align: center;
+                margin-bottom: 50px;
+                margin-left: 4px;
+                margin-right: 10px;
+                width: 770px;
+                height: 20px;
+                padding-top: 3px;
+                color: black;
+
+                background: #56D6E9;
+            }
+
+            .header {
+                padding: 0;
+                display: block;
+                position: running(header);
+                text-align: center;
+                margin-top: 20px;
+                margin-left: 4px;
+                margin-right: 4px;
+                width: 790px;
+                height: 50px;
+                border-top: 15px solid #56D6E9;
+                background: rgb(227, 228, 231);
+
+
+            }
+            .organization {
+                text-align: left;
+                margin-left: 180px;
+                margin-top: 5px;
+                font-size: 200%;
+            }
+
+            .table {
+                position: relative;
+                top: 90px;
+                /*margin-right: 20px;*/
+
+            }
+        </style>
+    </head>
+    <body>
+
+    <div class="header">
+
+        <div class="organization">
+            <div>
+                Opened cases by &nbsp;
+                <apex:outputText value="{0,date,dd/MM/yyy}">
+                    <apex:param value="{!firstDate}" />
+                </apex:outputText>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        Twistellar
+    </div>
+
+
+    <div class="table">
+        <apex:dataTable value="{!accountCases}" styleClass="tableClass" var="case" id="theTable2" rowClasses="odd,even" border="1px" width = "100%">
+            <apex:column>
+                <apex:facet name="header">Account Name</apex:facet>
+                <apex:outputText value="{!case.Account.Name}"/>
+            </apex:column>d
+            <apex:column>
+                <apex:facet name="header">Account Owner Name</apex:facet>
+                <apex:outputText value="{!case.Account.Owner.Name}"/>
+            </apex:column>
+            <apex:column>
+                <apex:facet name="header">Case Number</apex:facet>
+                <apex:outputText value="{!case.CaseNumber}"/>
+            </apex:column>
+            <apex:column>
+                <apex:facet name="header">Status</apex:facet>
+                <apex:outputText value="{!case.Status}"/>
+            </apex:column>
+            <apex:column>
+                <apex:facet name="header">Priority</apex:facet>
+                <apex:outputText value="{!case.Priority}"/>
+            </apex:column>
+            <apex:column>
+                <apex:facet name="header">Origin</apex:facet>
+                <apex:outputText value="{!case.Origin}"/>
+            </apex:column>
+        </apex:dataTable>
+<!--        <apex:pageBlock title="Cases">-->
+<!--            <apex:pageBlockTable value="{!accountCases}" var="case">-->
+<!--                <apex:column value="{!case.Account.Name}"/>-->
+<!--                <apex:column value="{!case.Account.OwnerId}"/>-->
+<!--                <apex:column value="{!case.CaseNumber}"/>-->
+<!--                <apex:column value="{!case.Status}"/>-->
+<!--                <apex:column value="{!case.Priority}"/>-->
+<!--                <apex:column value="{!case.Origin}"/>-->
+
+<!--            </apex:pageBlockTable>-->
+<!--        </apex:pageBlock>-->
+    </div>
+
+
+    </body>
+    </html>
+</apex:page>
