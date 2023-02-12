@@ -11,12 +11,12 @@ public inherited sharing class ServiceCaseQueueService {
         Integer numberOfRemainingRecords = 25;
         List<Case> finalListCases = new List<Case>();
 
-        finalListCases.addAll(getUserCases1());
-        finalListCases.addAll(getUserCases2(numberOfRemainingRecords - finalListCases.size()));
-        finalListCases.addAll(getUserCases3(numberOfRemainingRecords - finalListCases.size()));
-        finalListCases.addAll(getUserCases4(numberOfRemainingRecords - finalListCases.size()));
-        finalListCases.addAll(getUserCases5(numberOfRemainingRecords - finalListCases.size()));
-        finalListCases.addAll(getUserCases6(numberOfRemainingRecords - finalListCases.size()));
+        finalListCases.addAll(getUserCasesWithHighPriority());
+        finalListCases.addAll(getUserCasesWithMediumPriority(numberOfRemainingRecords - finalListCases.size()));
+        finalListCases.addAll(getUserCasesWithLowPriority(numberOfRemainingRecords - finalListCases.size()));
+        finalListCases.addAll(getGroupCasesWithHighPriority(numberOfRemainingRecords - finalListCases.size()));
+        finalListCases.addAll(getGroupCasesWithMediumPriority(numberOfRemainingRecords - finalListCases.size()));
+        finalListCases.addAll(getGroupCasesWithLowPriority(numberOfRemainingRecords - finalListCases.size()));
 
         return finalListCases;
     }
@@ -41,32 +41,32 @@ public inherited sharing class ServiceCaseQueueService {
         return groupIds;
     }
 
-    private static List<Case> getUserCases1() {
+    private static List<Case> getUserCasesWithHighPriority() {
 
         return [SELECT CaseNumber,OwnerId,Status,Priority,Origin FROM Case WHERE OwnerId = :UserInfo.getUserId() AND Priority = 'High' ORDER BY CreatedDate LIMIT 25];
     }
 
-    private static List<Case> getUserCases2(Integer casesLimit) {
+    private static List<Case> getUserCasesWithMediumPriority(Integer casesLimit) {
 
         return [SELECT CaseNumber,OwnerId,Status,Priority,Origin FROM Case WHERE OwnerId = :UserInfo.getUserId() AND Priority = 'Medium' ORDER BY CreatedDate LIMIT :casesLimit];
     }
 
-    private static List<Case> getUserCases3(Integer casesLimit) {
+    private static List<Case> getUserCasesWithLowPriority(Integer casesLimit) {
 
         return [SELECT CaseNumber,OwnerId,Status,Priority,Origin FROM Case WHERE OwnerId = :UserInfo.getUserId() AND Priority = 'Low' ORDER BY CreatedDate LIMIT :casesLimit];
     }
 
-    private static List<Case> getUserCases4(Integer casesLimit) {
+    private static List<Case> getGroupCasesWithHighPriority(Integer casesLimit) {
 
         return [SELECT CaseNumber,OwnerId,Status,Priority,Origin FROM Case WHERE OwnerId IN :groupIds AND Priority = 'High' ORDER BY CreatedDate LIMIT :casesLimit];
     }
 
-    private static List<Case> getUserCases5(Integer casesLimit) {
+    private static List<Case> getGroupCasesWithMediumPriority(Integer casesLimit) {
 
         return [SELECT CaseNumber,OwnerId,Status,Priority,Origin FROM Case WHERE OwnerId IN :groupIds AND Priority = 'Medium' ORDER BY CreatedDate LIMIT :casesLimit];
     }
 
-    private static List<Case> getUserCases6(Integer casesLimit) {
+    private static List<Case> getGroupCasesWithLowPriority(Integer casesLimit) {
 
         return [SELECT CaseNumber,OwnerId,Status,Priority,Origin FROM Case WHERE OwnerId IN :groupIds AND Priority = 'Low' ORDER BY CreatedDate LIMIT :casesLimit];
     }

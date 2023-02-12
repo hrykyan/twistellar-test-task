@@ -5,7 +5,7 @@ global with sharing class AccountCasesPdfCtrl {
     public List<Case> accountCases{get;set;}
     private Date currentDate = Date.today();
     private Date weekStart = currentDate.toStartOfWeek();
-    private Date previousWeekEnd = previousWeekStart() + 10;
+    private Date previousWeekEnd = previousWeekStart() + 7;
 
     public AccountCasesPdfCtrl() {
        this.firstDate = previousWeekStart();
